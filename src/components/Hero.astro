@@ -1,0 +1,45 @@
+---
+---
+<section class="pt-32 pb-20 px-6 relative overflow-hidden">
+  <div class="max-w-5xl mx-auto relative z-10">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-blue/10 border border-brand-blue/20 text-brand-blue text-xs font-bold mb-6 animate-fade-in">
+      <span class="relative flex h-2 w-2">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-blue opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-blue"></span>
+      </span>
+      POLÍTICA CR 2026
+    </div>
+    
+    <h1 class="text-5xl md:text-7xl font-display text-slate-900 leading-[0.9] mb-6 drop-shadow-sm">
+      <span class="text-primary italic">EDUCACIÓN</span> <br />
+      & <span class="text-secondary italic">SEGURIDAD</span>
+    </h1>
+    
+    <p class="text-lg md:text-xl text-slate-600 max-w-2xl leading-relaxed mb-10">
+      Análisis crítico y comparativo de los planes de gobierno para las próximas elecciones. ¿Qué proponen realmente los candidatos para resolver la crisis actual?
+    </p>
+    
+    <div class="flex flex-wrap gap-4">
+      <a href="#candidatos" class="px-8 py-4 bg-slate-900 text-white font-bold rounded-2xl hover:scale-105 transition-transform shadow-xl shadow-slate-900/10">
+        Ver Candidatos
+      </a>
+      <a href="#contexto" class="px-8 py-4 bg-white text-slate-900 border-2 border-slate-100 font-bold rounded-2xl hover:bg-slate-50 transition-colors">
+        Entender el Contexto
+      </a>
+    </div>
+  </div>
+  
+  <!-- Decoración visual -->
+  <div class="absolute -top-24 -right-24 w-96 h-96 bg-primary/10 rounded-full blur-3xl -z-10"></div>
+  <div class="absolute top-1/2 -left-24 w-64 h-64 bg-secondary/10 rounded-full blur-3xl -z-10"></div>
+</section>
+
+<style>
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in {
+    animation: fade-in 0.8s ease-out forwards;
+  }
+</style>

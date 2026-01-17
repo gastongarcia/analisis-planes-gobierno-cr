@@ -1,0 +1,35 @@
+---
+import { analysisData } from '../data/analysis';
+const { title, description, fullMetodology, criteria } = analysisData.methodology;
+---
+<section id="metodologia" class="py-20 px-6 bg-slate-50 border-y border-slate-100">
+  <div class="max-w-4xl mx-auto">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase mb-6">
+      Proceso de Análisis
+    </div>
+    <h2 class="text-3xl md:text-4xl font-display text-slate-900 mb-6">{title}</h2>
+    <p class="text-slate-700 italic border-l-4 border-primary pl-6 mb-8 leading-relaxed">
+      {description}
+    </p>
+    
+    <div class="space-y-8">
+        <p class="text-slate-600 leading-relaxed text-sm">
+            {fullMetodology}
+        </p>
+        
+        <div class="grid sm:grid-cols-3 gap-6">
+            {criteria.map((crit, index) => (
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm relative overflow-hidden group">
+                    <div class="absolute -right-2 -top-2 text-6xl font-display text-slate-50 group-hover:text-primary/5 transition-colors">
+                        {index + 1}
+                    </div>
+                    <h4 class="font-bold text-slate-900 mb-3 relative z-10">{crit.name}</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed relative z-10">
+                        {crit.description}
+                    </p>
+                </div>
+            ))}
+        </div>
+    </div>
+  </div>
+</section>

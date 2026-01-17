@@ -1,0 +1,48 @@
+---
+import { analysisData } from '../data/analysis';
+
+const getScoreColor = (score) => {
+  if (score >= 7.5) return 'text-emerald-500';
+  if (score >= 6) return 'text-amber-500';
+  return 'text-rose-500';
+};
+---
+<section class="py-20 px-6">
+  <div class="max-w-4xl mx-auto">
+    <div class="mb-12 text-center">
+      <h2 class="text-3xl font-display text-slate-900 mb-2">TABLA COMPARATIVA</h2>
+      <p class="text-slate-500 text-sm italic">Resumen rápido de calificaciones por eje.</p>
+    </div>
+    
+    <div class="bg-white rounded-3xl border border-slate-100 shadow-xl overflow-hidden">
+      <table class="w-full text-left">
+        <thead>
+          <tr class="bg-slate-50 border-b border-slate-100">
+            <th class="px-6 py-4 text-xs font-black text-slate-400 uppercase tracking-widest">Candidato</th>
+            <th class="px-6 py-4 text-xs font-black text-slate-400 uppercase tracking-widest text-center">Educación</th>
+            <th class="px-6 py-4 text-xs font-black text-slate-400 uppercase tracking-widest text-center">Seguridad</th>
+            <th class="px-6 py-4 text-xs font-black text-slate-400 uppercase tracking-widest text-center">Global</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-50">
+          {analysisData.candidates.map(candidate => {
+            const global = (candidate.education.note + candidate.security.note) / 2;
+            return (
+              <tr class="hover:bg-slate-50/50 transition-colors">
+                <td class="px-6 py-4">
+                  <div class="flex items-center gap-3">
+                    <span class="w-6 h-6 rounded bg-primary/10 text-primary flex items-center justify-center font-bold text-xs">{candidate.id}</span>
+                    <span class="font-bold text-slate-700">{candidate.name}</span>
+                  </div>
+                </td>
+                <td class={`px-6 py-4 text-center font-black ${getScoreColor(candidate.education.note)}`}>{candidate.education.note.toFixed(1)}</td>
+                <td class={`px-6 py-4 text-center font-black ${getScoreColor(candidate.security.note)}`}>{candidate.security.note.toFixed(1)}</td>
+                <td class={`px-6 py-4 text-center font-black ${getScoreColor(global)}`}>{global.toFixed(1)}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

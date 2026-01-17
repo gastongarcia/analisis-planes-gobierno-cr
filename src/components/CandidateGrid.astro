@@ -1,0 +1,23 @@
+---
+import { analysisData } from '../data/analysis';
+import CandidateCard from './CandidateCard.astro';
+---
+<section id="candidatos" class="py-24 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-16">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase mb-6">
+        Análisis por Candidato
+      </div>
+      <h2 class="text-4xl md:text-5xl font-display text-slate-900 mb-6">COMPARATIVA <br/><span class="text-secondary italic">DETALLADA</span></h2>
+      <p class="text-slate-500 max-w-2xl text-lg leading-relaxed">
+        Sometimos los planes de gobierno a un filtro de realismo administrativo y fiscal. Estas son las calificaciones obtenidas basadas en viabilidad, relevancia y claridad.
+      </p>
+    </div>
+
+    <div class="space-y-12">
+      {analysisData.candidates.map((candidate) => (
+        <CandidateCard {...candidate} />
+      ))}
+    </div>
+  </div>
+</section>

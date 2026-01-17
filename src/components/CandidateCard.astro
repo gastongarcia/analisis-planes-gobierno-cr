@@ -1,0 +1,140 @@
+---
+const { id, name, education, security } = Astro.props;
+
+const getScoreColor = (score) => {
+  if (score >= 7.5) return 'text-emerald-500';
+  if (score >= 6) return 'text-amber-500';
+  return 'text-rose-500';
+};
+
+const getScoreBg = (score) => {
+  if (score >= 7.5) return 'bg-emerald-50';
+  if (score >= 6) return 'bg-amber-50';
+  return 'bg-rose-50';
+};
+---
+
+<div class="bg-white rounded-[40px] border border-slate-100 shadow-2xl shadow-slate-200/50 overflow-hidden group hover:border-primary/20 transition-all duration-500">
+  <div class="grid lg:grid-cols-[280px_1fr_1fr] divide-y lg:divide-y-0 lg:divide-x divide-slate-100">
+    
+    {/* Columna 1: Info del Candidato */}
+    <div class="p-8 bg-slate-50/50 flex flex-col items-center lg:items-start text-center lg:text-left">
+      <div class="w-24 h-24 rounded-3xl bg-primary text-white flex items-center justify-center text-4xl font-black mb-6 shadow-xl shadow-primary/20 group-hover:scale-110 transition-transform duration-500">
+        {id}
+      </div>
+      <h3 class="text-3xl font-display text-slate-900 mb-1">{name}</h3>
+      <p class="text-slate-400 font-bold text-xs uppercase tracking-tighter mb-6">Candidato 2026</p>
+      
+      <div class="w-full space-y-4 mb-8">
+        <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
+          <span class="block text-[10px] text-slate-400 uppercase font-black tracking-widest mb-1">Nota Global</span>
+          <span class={`text-4xl font-black ${getScoreColor((education.note + security.note) / 2)}`}>
+            {((education.note + security.note) / 2).toFixed(1)}
+          </span>
+        </div>
+        
+        <div class="p-5 bg-primary/5 border-l-4 border-primary rounded-r-2xl">
+          <p class="text-sm font-bold text-slate-800 leading-relaxed italic">
+            "{education.verdict}"
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {/* Columna 2: Educación */}
+    <div class="p-8 lg:p-10 space-y-8">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3 text-primary font-bold">
+          <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          </div>
+          <div>
+            <span class="block text-[10px] uppercase tracking-widest text-slate-400">Eje de Análisis</span>
+            <span class="text-xl uppercase tracking-wider">Educación</span>
+          </div>
+        </div>
+        <div class="text-right">
+          <span class="block text-[10px] uppercase tracking-widest text-slate-400 font-black">Nota Eje</span>
+          <span class={`font-black text-3xl ${getScoreColor(education.note)}`}>{education.note.toFixed(1)}</span>
+        </div>
+      </div>
+      
+      <div class="space-y-6">
+        {[
+          { es: 'Viabilidad', en: 'viability' },
+          { es: 'Relevancia', en: 'relevance' },
+          { es: 'Claridad', en: 'clarity' }
+        ].map((crit) => (
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-slate-500 font-bold uppercase tracking-widest">{crit.es}</span>
+              <span class="text-sm font-black text-slate-700">{education[crit.en].score}/10</span>
+            </div>
+            <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                <div class={`h-full ${getScoreBg(education[crit.en].score)} transition-all duration-1000`} style={`width: ${education[crit.en].score * 10}%`}></div>
+            </div>
+            <p class="text-[13px] text-slate-600 leading-relaxed bg-slate-50 p-4 rounded-2xl border border-slate-100 italic">
+              {education[crit.en].detail}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <div class="pt-6 border-t border-slate-100">
+        <h4 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Resumen Factual de Propuestas</h4>
+        <p class="text-sm text-slate-600 leading-relaxed bg-primary/5 p-5 rounded-2xl border border-primary/10">
+          {education.factualSummary}
+        </p>
+      </div>
+    </div>
+
+    {/* Columna 3: Seguridad */}
+    <div class="p-8 lg:p-10 space-y-8 bg-slate-50/30">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-3 text-secondary font-bold">
+          <div class="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <span class="block text-[10px] uppercase tracking-widest text-slate-400">Eje de Análisis</span>
+            <span class="text-xl uppercase tracking-wider">Seguridad</span>
+          </div>
+        </div>
+        <div class="text-right">
+          <span class="block text-[10px] uppercase tracking-widest text-slate-400 font-black">Nota Eje</span>
+          <span class={`font-black text-3xl ${getScoreColor(security.note)}`}>{security.note.toFixed(1)}</span>
+        </div>
+      </div>
+      
+      <div class="space-y-6">
+        {[
+          { es: 'Viabilidad', en: 'viability' },
+          { es: 'Relevancia', en: 'relevance' },
+          { es: 'Claridad', en: 'clarity' }
+        ].map((crit) => (
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-slate-500 font-bold uppercase tracking-widest">{crit.es}</span>
+              <span class="text-sm font-black text-slate-700">{security[crit.en].score}/10</span>
+            </div>
+            <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                <div class={`h-full ${getScoreBg(security[crit.en].score)} transition-all duration-1000`} style={`width: ${security[crit.en].score * 10}%`}></div>
+            </div>
+            <p class="text-[13px] text-slate-600 leading-relaxed bg-slate-50 p-4 rounded-2xl border border-slate-100 italic">
+              {security[crit.en].detail}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <div class="pt-6 border-t border-slate-100">
+        <h4 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Resumen Factual de Propuestas</h4>
+        <p class="text-sm text-slate-600 leading-relaxed bg-secondary/5 p-5 rounded-2xl border border-secondary/10">
+          {security.factualSummary}
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
