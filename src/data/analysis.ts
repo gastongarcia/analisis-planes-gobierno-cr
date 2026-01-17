@@ -54,6 +54,7 @@ export const analysisData = {
       id: "A",
       name: "Candidato A",
       subtitle: "Claudia Dobles",
+      slug: "claudia-dobles-analisis",
       education: {
         note: 7.0,
         verdict: "Propuesta de \"reconstrucción lenta\". Es la más sensata si se quiere arreglar el sistema desde los cimientos (currículo, docentes, infraestructura digital), pero carece de \"dientes\" financieros.",
@@ -75,6 +76,7 @@ export const analysisData = {
       id: "B",
       name: "Candidato B",
       subtitle: "Alvaro Ramos",
+      slug: "alvaro-ramos-analisis",
       education: {
         note: 4.5,
         verdict: "Propuesta de \"Corte Populista-Gremial\". Suena \"bonita\" para el trabajador del MEP, pero ofrece poco para el aprendizaje real del estudiante.",
@@ -96,6 +98,7 @@ export const analysisData = {
       id: "C",
       name: "Candidato C",
       subtitle: "Laura Fernández",
+      slug: "laura-fernandez-analisis",
       education: {
         note: 7.8,
         verdict: "Propuesta de \"Shock Modernizador\". El mejor plan técnico, pero el más difícil políticamente por tocar FEES y Juntas de Educación.",
@@ -117,6 +120,7 @@ export const analysisData = {
       id: "D",
       name: "Candidato D",
       subtitle: "Juan C. Hidalgo",
+      slug: "juan-c-hidalgo-analisis",
       education: {
         note: 6.5,
         verdict: "Propuesta de \"Reingeniería Financiera e Institucional\". Creativa (fondos de pensiones), pero depende de reformas legales complejas.",
@@ -138,6 +142,7 @@ export const analysisData = {
       id: "E",
       name: "Candidato E",
       subtitle: "Ariel Robles",
+      slug: "ariel-robles-analisis",
       education: {
         note: 3.5,
         verdict: "Propuesta de \"Reivindicación Gremial e Ideológica\". Mira hacia adentro del sistema (empleados), no hacia los resultados de los estudiantes.",
@@ -159,6 +164,7 @@ export const analysisData = {
       id: "F",
       name: "Candidato F",
       subtitle: "Jose Aguilar B.",
+      slug: "jose-aguilar-b-analisis",
       education: {
         note: 7.9,
         verdict: "Propuesta de \"Shock de Eficiencia Empresarial\". Pragmática y orientada a la economía, pero con riesgos de viabilidad sindical.",
@@ -180,6 +186,7 @@ export const analysisData = {
       id: "G",
       name: "Candidato G",
       subtitle: "Natalia Diaz",
+      slug: "natalia-diaz-analisis",
       education: {
         note: 8.2,
         verdict: "Propuesta de \"Rescate Social y Laboral\". El plan más \"callejero\" y ejecutable a corto plazo, centrado en empleo rápido.",

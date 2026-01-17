@@ -1,21 +1,121 @@
 ---
+import { analysisData } from '../data/analysis';
 ---
+
 <header class="fixed top-0 left-0 w-full z-50 bg-white/70 backdrop-blur-md border-b border-slate-200/50 transition-all duration-300">
   <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-    <a href="#" class="text-xl font-display text-primary flex items-center gap-2">
+    <a href="/" class="text-xl font-display text-primary flex items-center gap-2">
       <span class="w-8 h-8 rounded-lg bg-primary text-white flex items-center justify-center font-bold italic">CR</span>
       <span>Elecciones 2026</span>
     </a>
     
     <div class="hidden md:flex items-center gap-8">
-      <a href="#contexto" class="text-sm font-bold text-slate-600 hover:text-primary transition-colors">Contexto</a>
-      <a href="#candidatos" class="text-sm font-bold text-slate-600 hover:text-primary transition-colors">Candidatos</a>
+      <a href="/#contexto" class="text-sm font-bold text-slate-600 hover:text-primary transition-colors">Contexto</a>
+      <a href="/#candidatos" class="text-sm font-bold text-slate-600 hover:text-primary transition-colors">Todos los Candidatos</a>
+      
+      {/* Dropdown Desktop */}
+      <div class="relative group">
+        <button class="flex items-center gap-1 bg-primary text-white text-xs font-bold px-5 py-2.5 rounded-full hover:bg-brand-purple transition-all duration-300 shadow-lg shadow-primary/20 group">
+          Candidatos
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-y-0.5 transition-transform"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        
+        <div class="absolute right-0 top-full pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+          <div class="w-64 bg-white rounded-3xl shadow-2xl border border-slate-100 p-3 overflow-hidden">
+            {analysisData.candidates.map((candidate) => (
+              <a 
+                href={`/candidatos/${candidate.slug}/`}
+                class="flex items-center gap-3 p-3 rounded-2xl hover:bg-primary/5 text-slate-600 hover:text-primary transition-all group/item"
+              >
+                <div class="w-8 h-8 rounded-xl bg-primary/10 flex items-center justify-center font-black text-xs group-hover/item:bg-primary group-hover/item:text-white transition-colors">
+                  {candidate.id}
+                </div>
+                <div class="flex flex-col">
+                  <span class="text-sm font-black leading-none mb-1">{candidate.name}</span>
+                  <span class="text-[10px] text-slate-400 font-bold uppercase tracking-tighter">{candidate.subtitle}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
     
-    <div class="flex items-center gap-4">
-      <button class="bg-primary text-white text-xs font-bold px-4 py-2 rounded-full hover:bg-brand-purple transition-colors shadow-lg shadow-primary/20">
-        Informate
-      </button>
+    {/* Botón Mobile Menu */}
+    <button id="menu-toggle" class="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 focus:outline-none">
+      <span class="w-6 h-0.5 bg-slate-900 rounded-full transition-all duration-300 origin-center" id="bar-1"></span>
+      <span class="w-6 h-0.5 bg-slate-900 rounded-full transition-all duration-300" id="bar-2"></span>
+      <span class="w-6 h-0.5 bg-slate-900 rounded-full transition-all duration-300 origin-center" id="bar-3"></span>
+    </button>
+  </div>
+
+  {/* Mobile Menu Overlay */}
+  <div id="mobile-menu" class="fixed inset-0 top-16 bg-white z-40 translate-x-full transition-transform duration-300 overflow-y-auto pb-12">
+    <div class="p-6 space-y-8">
+      <div class="space-y-4">
+        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest px-4">Navegación</p>
+        <div class="grid gap-2">
+          <a href="/#contexto" class="text-2xl font-display text-slate-900 px-4 py-2 mobile-link">Contexto</a>
+          <a href="/#candidatos" class="text-2xl font-display text-slate-900 px-4 py-2 mobile-link">Todos los Candidatos</a>
+        </div>
+      </div>
+
+      <div class="space-y-4">
+        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest px-4">Análisis Individual</p>
+        <div class="grid gap-4 px-4">
+          {analysisData.candidates.map((candidate) => (
+            <a 
+              href={`/candidatos/${candidate.slug}/`}
+              class="flex items-center gap-4 group mobile-link"
+            >
+              <div class="w-10 h-10 rounded-2xl bg-primary/10 flex items-center justify-center font-black text-primary text-sm group-hover:bg-primary group-hover:text-white transition-all">
+                {candidate.id}
+              </div>
+              <div class="flex flex-col">
+                <span class="text-xl font-display text-slate-800">{candidate.name}</span>
+                <span class="text-[11px] text-slate-400 font-bold uppercase tracking-wider">{candidate.subtitle}</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
     </div>
   </div>
 </header>
+
+<script>
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const bar1 = document.getElementById('bar-1');
+  const bar2 = document.getElementById('bar-2');
+  const bar3 = document.getElementById('bar-3');
+  const mobileLinks = document.querySelectorAll('.mobile-link');
+
+  let isMenuOpen = false;
+
+  function toggleMenu() {
+    isMenuOpen = !isMenuOpen;
+    
+    if (isMenuOpen) {
+      mobileMenu.classList.remove('translate-x-full');
+      bar1.classList.add('rotate-45', 'translate-y-2');
+      bar2.classList.add('opacity-0');
+      bar3.classList.add('-rotate-45', '-translate-y-2');
+      document.body.style.overflow = 'hidden';
+    } else {
+      mobileMenu.classList.add('translate-x-full');
+      bar1.classList.remove('rotate-45', 'translate-y-2');
+      bar2.classList.remove('opacity-0');
+      bar3.classList.remove('-rotate-45', '-translate-y-2');
+      document.body.style.overflow = '';
+    }
+  }
+
+  menuToggle?.addEventListener('click', toggleMenu);
+
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (isMenuOpen) toggleMenu();
+    });
+  });
+</script>
